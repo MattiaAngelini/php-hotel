@@ -11,7 +11,6 @@ NOTA: deve essere possibile utilizzare entrambi i filtri contemporaneamente (es.
 Se non viene specificato nessun filtro, visualizzare come in precedenza tutti gli hotel.
 
  -->
-
 <?php
 
     $hotels = [
@@ -53,10 +52,8 @@ Se non viene specificato nessun filtro, visualizzare come in precedenza tutti gl
         ],
 
     ];
- 
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,16 +65,30 @@ Se non viene specificato nessun filtro, visualizzare come in precedenza tutti gl
     <title>php-hotel</title>
 </head>
 <body>
-
-    <ul>
-        <?php foreach($hotels as $hotel) { ?>
-            <li>NAME: <?php echo($hotel['name'])?></li>
-            <li>DESCRIPTION: <?php echo($hotel['description'])?></li>
-            <li>PARKING: <?php echo($hotel['parking'])?></li>
-            <li>VOTE: <?php echo($hotel['vote'])?></li>
-            <li>DISTANCE TO CENTER:<?php echo($hotel['distance_to_center'])?> </li>
+    
+    <!--HOTELS TABLES-->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">NAME</th>
+                <th scope="col">DESCRIPTIONS</th>
+                <th scope="col">PARKING</th>
+                <th scope="col">VOTE</th>
+                <th scope="col">DISTANCE TO CENTER</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($hotels as $hotel) { ?>
+                <tr>
+                    <td><?php echo($hotel['name'])?></td>
+                    <td><?php echo($hotel['description'])?></td>               
+                    <td><?php echo($hotel['parking'] ? 'Yes' : 'No') ?></td> <!-- TERNIARIO: SE PARKING è TRUE STAMPA YES ALTRIMENTI NO -->
+                    <td><?php echo($hotel['vote'])?></td>
+                    <td><?php echo($hotel['distance_to_center'])?></td>   
+                </tr>
             <?php } ?>
-    </ul>
+        </tbody>
+    </table>
 
 </body>
 </html>
