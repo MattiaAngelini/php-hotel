@@ -1,8 +1,5 @@
-<!-- Descrizione
-Bonus:
-1 - Aggiungere un form ad inizio pagina che tramite una richiesta GET permetta di filtrare gli hotel che hanno un parcheggio.
 
- -->
+
 <?php
 
     $hotels = [
@@ -45,8 +42,10 @@ Bonus:
 
     ];
 
+    $filteredHotels = [];
+    $votedHotels = [];
+
     if(isset($_GET['hotel_parking'])) {
-        $filteredHotels = [];
         foreach($hotels as $hotel) {
             if($hotel['parking'] === true) {
                 $filteredHotels[] = $hotel;
@@ -55,6 +54,19 @@ Bonus:
         $hotels = $filteredHotels;
     }
 
+    if(isset($_GET['hotel_vote'])) {
+        $voteNumber = intval($_GET['hotel_vote']);
+        foreach($hotels as $hotel) {
+            if($hotel['vote'] === $voteNumber) {
+                $votedHotels[] = $hotel;
+            }
+        }
+        $hotels = $votedHotels;
+    }
+
+    var_dump($_GET['hotel_vote']);
+    var_dump($voteNumber);
+   
 ?>
 
 <!DOCTYPE html>
@@ -70,9 +82,25 @@ Bonus:
 
     <!-- CHECKBOX PARKING -->
     <form class="p-3" method="GET">
-        <label for="">Hotel con parcheggio
-            <input name="hotel_parking" type="checkbox">
-        </label>
+
+         <div class="p-1"> 
+            <label for="">Hotel con parcheggio
+                 <input name="hotel_parking" type="checkbox">
+            </label>
+        </div>
+       
+        <div class="p-1 mb-2">  
+            <label for="">VOTO
+                <select name="hotel_vote" id="">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </label>
+        </div>
+      
         <button type="submit">Filtra</button>
     </form>
     
